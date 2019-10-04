@@ -19,16 +19,19 @@
 // }
 
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
 
 function Home() {
-  return <h2>Home</h2>;
+  const projetos = JSON.parse(localStorage.getItem("projetos")) || [];
+  return (
+    <div>
+      <h2>Home</h2>
+      {projetos.map(item => (<h1>{item.descricao}</h1>))}
+    </div>
+  );
 }
 
-function About() {
-  return <h2>About</h2>;
-}
-class ProjetoForm extends React.Component {
+class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,11 +61,11 @@ class ProjetoForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { form } = this.state;
-    debugger;
-    if (form) {
+    if (form.length) {
       const projetos = JSON.parse(localStorage.getItem("projetos")) || [];
       projetos.push(form);
       localStorage.setItem('projetos', JSON.stringify(projetos));
+      this.props.history.push('/')
     }
   }
 
@@ -112,6 +115,7 @@ class ProjetoForm extends React.Component {
     );
   }
 }
+const ProjetoForm = withRouter(Form);
 function Projetos() {
   return (
     <div>
@@ -139,9 +143,6 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
           <Route path="/projetos">
             <Projetos />
           </Route>
