@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Search.css'
 
 export default class MyFilteringComponent extends React.Component {
   state = {
@@ -24,19 +25,20 @@ export default class MyFilteringComponent extends React.Component {
   render() {
     return (
       <div>
-        <h1>Colabore</h1>
-        <span>
-          <form>
-            <input type="text" placeholder="Busca" onChange={this.filterList} />
-          </form>
-          <div>
+          <span>
+            <form>
+              <input type="text" placeholder="Busca" onChange={this.filterList} />
+            </form>
+            </span>
+          {/*<div>
             {
               this.state.items.map(function (item) {
                 return <div key={item}>{item}</div>
               })
             }
-          </div>
-        </span>
+          
+        </div>*/}
+        
       </div>
     );
   }

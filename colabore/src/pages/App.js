@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../App.css';
+import MyFilteringComponent from './search'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+
+const Pessosas =[ "Jose", "maria",];
+
 function Home() {
-  return <h2>Home</h2>;
+  return (<div>
+    <MyFilteringComponent content = {Pessosas} />
+  </div>) ;
 }
 
 function About() {
@@ -47,7 +53,7 @@ class ProjetoForm extends React.Component {
     }
   }
 
-  render() {
+  render() {  
     return (
       <form onSubmit={this.handleSubmit}>
         <label>criado:</label>
