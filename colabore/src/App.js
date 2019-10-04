@@ -1,21 +1,71 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+// import './App.css';
 
-import React, { Component } from 'react';
-import MyFilteringComponent from './seach';
+// import React, { Component } from 'react';
+// import MyFilteringComponent from './seach';
 
-class App extends Component {
-  render() {
+// class App extends Component {
+//   render() {
 
-    var Resultados =
-    ['casa','rua'
+//     var Resultados =
+//     ['casa','rua'
         
-    ];
+//     ];
 
-    return (
-        <MyFilteringComponent content={Resultados} />
-    );
-  }
+//     return (
+//         <MyFilteringComponent content={Resultados} />
+//     );
+//   }
+// }
+
+
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+function Home() {
+  return <h2>Home</h2>;
 }
 
-export default App;
+function About() {
+  return <h2>About</h2>;
+}
+
+function Users() {
+  return <h2>Users</h2>;
+}
+
+export default function App() {
+  return (
+    <Router>
+      <div>
+        <nav class="topnav">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
