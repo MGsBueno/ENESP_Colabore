@@ -1,68 +1,70 @@
-.App {
-  text-align: center;
+App {
+    text-align: center;
+    
+  }
   
-}
-
-body {
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-* {
-  box-sizing: border-box;
-  
-}
-
-
-/*
-placeHolder css
-*/
-input {
-  
-  border: #000;
-  padding: 10px;
-  font-size: 1.2em;
-  width: 100%;
+  body {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  * {
+    box-sizing: border-box;
+    
+  }
   
   
-}
-label, input {
-  font-family: sans-serif;
-  background:#F0F8FF;
-  ;
-
-}
-form {
-  width: 200%;
-}
-
-input::placeholder {
-  color: Black;
-}
-
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: Black;
-  opacity: 1; /* Firefox */
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: Black;
-}
-::-ms-input-placeholder { /* Microsoft Edge */
-  color: Black;
-}
-
-
-
-/* white line */
-
-span:before {
-  content: '';
-  width: 100%;
-  height: 30em;
-  display: inline-block;
-  background: white; /* Remove, just showing empty line */
-}
-span {
-  display: inline-block; /* Can remove if span:before width doesn't matter. */
-}
+  /*
+  placeHolder css
+  */
+  input {
+    
+    border: #000;
+    padding: 10px;
+    font-size: 1.2em;
+    width: 100%;
+    
+    
+  }
+  label, input {
+    font-family: sans-serif;
+    background:#F0F8FF;
+    ;
+  
+  }
+  form {
+    width: 200%;
+  }
+  
+  input::placeholder {
+    color: Black;
+  }
+  
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: Black;
+    opacity: 1; /* Firefox */
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: Black;
+  }
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: Black;
+  }
+  
+  
+  
+  /* white line */
+  
+  span:before {
+    content: '';
+    width: 100%;
+    height: 30em;
+    display: inline-block;
+    background: white; /* Remove, just showing empty line */
+  }
+  span {
+    display: inline-block; /* Can remove if span:before width doesn't matter. */
+  }
+  
+  
