@@ -40,18 +40,10 @@
   
   
   /* white line */
-  
-  span:before {
-    content: '';
-    tab-size: 200px;
-    width: 100%;
-    height: 20em;
-    display: inline-block;
-    /* Remove, just showing empty line */
-  }
-  span {
+    span {
     display: inline-block; /* Can remove if span:before width doesn't matter. */
-    margin-left: 40em;
+    width: 15%;    
+
   }
   
   

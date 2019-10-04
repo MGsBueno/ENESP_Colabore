@@ -1,6 +1,5 @@
 import React from 'react';
-import '../Search.css'
-
+import '../Search.css';
 export default class MyFilteringComponent extends React.Component {
   state = {
     initialItems: [],
@@ -8,37 +7,38 @@ export default class MyFilteringComponent extends React.Component {
   }
 
   filterList = (event) => {
-    let items = this.state.initialItems;
-    items = items.filter((item) => {
-      return item.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
-    });
-    this.setState({ items: items });
+    let {initialItems} = this.state;
+    let items = [];
+    if (initialItems) {
+      items = initialItems.filter((item) => {
+        return item.descricao && item.descricao.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
+      });
+      this.setState({ items: items });
+    }
   }
 
   componentWillMount = () => {
     this.setState({
-      initialItems: this.props.content,
-      items: this.props.content
+      initialItems: this.props.initialItems,
+      items: this.props.items
     })
   }
 
   render() {
     return (
       <div>
-          <span>
-            <form>
-              <input type="text" placeholder="Busca" onChange={this.filterList} />
-            </form>
-            </span>
-          {/*<div>
+        <h1>Colabore</h1>
+          <span><form>
+            <input type="text" placeholder="Busca" onChange={this.filterList} />
+          </form>
+          </span>
+          <div>
             {
-              this.state.items.map(function (item) {
-                return <div key={item}>{item}</div>
+              this.state.items && this.state.items.map(function (item) {
+                return <div key={item.descricao}>{item.descricao} | autor: {item.nome}</div>
               })
             }
-          
-        </div>*/}
-        
+          </div>
       </div>
     );
   }

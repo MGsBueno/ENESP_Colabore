@@ -1,21 +1,17 @@
-import React from 'react';
-import '../App.css';
-import MyFilteringComponent from './search'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
-
-const Pessosas =[ "Jose", "maria",];
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
+import MyFilteringComponent from "./search";
 
 function Home() {
-  return (<div>
-    <MyFilteringComponent content = {Pessosas} />
-  </div>) ;
+  const projetos = JSON.parse(localStorage.getItem("projetos")) || [];
+  return (
+    <div>
+      <MyFilteringComponent initialItems={projetos}></MyFilteringComponent>
+    </div>
+  );
 }
 
-function About() {
-  return <h2>About</h2>;
-}
-class ProjetoForm extends React.Component {
+class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,15 +41,16 @@ class ProjetoForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { form } = this.state;
-    debugger;
     if (form) {
       const projetos = JSON.parse(localStorage.getItem("projetos")) || [];
       projetos.push(form);
       localStorage.setItem('projetos', JSON.stringify(projetos));
+
+      this.props.history.push('/');
     }
   }
 
-  render() {  
+  render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>criado:</label>
@@ -70,35 +67,43 @@ class ProjetoForm extends React.Component {
           value={this.state.telefone}
           onChange={this.handleInputChange}
         />
-        <label>Descricao:</label>
-        <textarea
-          name="descricao"
-          value={this.state.descricao}
-          onChange={this.handleInputChange}
-        ></textarea>
+
+        <label>Habilidade:</label>
+
         <input
           name="hab1"
           type="text"
           value={this.state.hab1}
           onChange={this.handleInputChange}
         />
+
+        <label>Habilidade:</label>
         <input
           type="text"
           name="hab2"
           value={this.state.hab2}
           onChange={this.handleInputChange}
         />
+        <label>Habilidade:</label>
         <input
           type="text"
           name="hab3"
           value={this.state.hab3}
           onChange={this.handleInputChange}
         />
+        <label>Descricao:</label>
+        <textarea
+          name="descricao"
+          value={this.state.descricao}
+          onChange={this.handleInputChange}
+        ></textarea>
         <button>salvar</button>
       </form>
     );
   }
 }
+const ProjetoForm = withRouter(Form);
+
 function Projetos() {
   return (
     <div>
@@ -126,9 +131,6 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
           <Route path="/projetos">
             <Projetos />
           </Route>
