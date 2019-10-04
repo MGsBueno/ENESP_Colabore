@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
-import Login from './Login'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-        
+
 function Home() {
   return <h2>Home</h2>;
 }
@@ -10,12 +9,100 @@ function Home() {
 function About() {
   return <h2>About</h2>;
 }
+class ProjetoForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      form: {},
+      nome: "",
+      descricao: "",
+      hab1: "",
+      hab2: "",
+      hab3: "",
+      telefone: ""
+    };
 
-function Users() {
-  return <h2>Users</h2>;
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.state.form[name] = value;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { form } = this.state;
+    debugger;
+    if (form) {
+      const projetos = JSON.parse(localStorage.getItem("projetos")) || [];
+      projetos.push(form);
+      localStorage.setItem('projetos', JSON.stringify(projetos));
+    }
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>criado:</label>
+        <input
+          type="text"
+          name="nome"
+          value={this.state.nome}
+          onChange={this.handleInputChange}
+        />
+        <label>telefone:</label>
+        <input
+          type="text"
+          name="telefone"
+          value={this.state.telefone}
+          onChange={this.handleInputChange}
+        />
+        <label>Descricao:</label>
+        <textarea
+          name="descricao"
+          value={this.state.descricao}
+          onChange={this.handleInputChange}
+        ></textarea>
+        <input
+          name="hab1"
+          type="text"
+          value={this.state.hab1}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="text"
+          name="hab2"
+          value={this.state.hab2}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="text"
+          name="hab3"
+          value={this.state.hab3}
+          onChange={this.handleInputChange}
+        />
+        <button>salvar</button>
+      </form>
+    );
+  }
+}
+function Projetos() {
+  return (
+    <div>
+      <h2>Cadastro de projetos</h2>
+      <ProjetoForm></ProjetoForm>
+    </div>
+  );
 }
 
-function App() {
+export default function App() {
   return (
     <Router>
       <div>
@@ -25,10 +112,7 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
+              <Link to="/projetos">Projetos</Link>
             </li>
           </ul>
         </nav>
@@ -39,8 +123,8 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/projetos">
+            <Projetos />
           </Route>
           <Route path="/">
             <Home />
@@ -50,4 +134,3 @@ function App() {
     </Router>
   );
 }
-export default App;
