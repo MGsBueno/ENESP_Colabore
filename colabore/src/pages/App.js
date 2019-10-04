@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
+import MyFilteringComponent from "../seach";
 
 function Home() {
   const projetos = JSON.parse(localStorage.getItem("projetos")) || [];
   return (
     <div>
-      <h2>Home</h2>
-      {projetos.map(item => (<h1>{item.descricao}</h1>))}
+      <MyFilteringComponent initialItems={projetos}></MyFilteringComponent>
     </div>
   );
 }
@@ -45,7 +45,7 @@ class Form extends React.Component {
       const projetos = JSON.parse(localStorage.getItem("projetos")) || [];
       projetos.push(form);
       localStorage.setItem('projetos', JSON.stringify(projetos));
-      this.props.history.push('/')
+      this.props.history.push('/');
     }
   }
 
@@ -66,12 +66,6 @@ class Form extends React.Component {
           value={this.state.telefone}
           onChange={this.handleInputChange}
         />
-        <label>Descricao:</label>
-        <textarea
-          name="descricao"
-          value={this.state.descricao}
-          onChange={this.handleInputChange}
-        ></textarea>
         <label>Habilidade:</label>
         <input
           name="hab1"
@@ -93,6 +87,12 @@ class Form extends React.Component {
           value={this.state.hab3}
           onChange={this.handleInputChange}
         />
+        <label>Descricao:</label>
+        <textarea
+          name="descricao"
+          value={this.state.descricao}
+          onChange={this.handleInputChange}
+        ></textarea>
         <button>salvar</button>
       </form>
     );
